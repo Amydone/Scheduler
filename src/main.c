@@ -1,19 +1,19 @@
 #include <stdio.h>
-#include "../headers/schedule.h"
+#include "../headers/subjects.h"
 #include "../headers/login.h"
 
 int main(void) {
 
 int flag;
 
-    if(!flag = ScheduleExist())
+    if(!(flag = SubjectsExist()))
     {
-        ScheduleShow();
+        SubjectsShow();
         Entrance();
 
     }
     else
-        ScheduleNone();
+        SubjectsNone();
         Entrance();
 
 

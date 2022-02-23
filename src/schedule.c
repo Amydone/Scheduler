@@ -2,14 +2,14 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-int ScheduleExist(void) {
+int SubjectsExist(void) {
 
 DIR *dir;
 FILE *fp;
 
 struct dirent *dirinfo;
 
-    if(!dir = opendir("./"))
+    if(!(dir = opendir("./")))
     {
         printf("Error of open dir directory\n");
 
@@ -18,24 +18,29 @@ struct dirent *dirinfo;
     }
     else
 
-        if(!dirinfo = readdir(dir))
+//TODO
+        while(dirinfo = readdir(dir))
         {
+            if(strncmp(dirinfo->d_name, 
+            printf("%s\n", dirinfo->d_name);
 
-            return 1;
+            getchar();
+            //return 0;
 
         }
-        else
-            return 0;
+        
+            return 1;
 
 
 }
 
-void ScheduleShow(void) {
+void SubjectsShow(void) {
 
+    printf("Your subjects:");
 
 }
 
-void ScheduleNone(void) {
+void SubjectsNone(void) {
 
 
 }
