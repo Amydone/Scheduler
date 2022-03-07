@@ -4,11 +4,11 @@
 
 int main(void) {
 
-int flag;
+struct subject *subjects;
 
-    if(!(flag = SubjectsExist()))
+    if(subjects = SubjectsExist())
     {
-        SubjectsShow();
+        SubjectsShow(subjects);
         Entrance();
 
     }
