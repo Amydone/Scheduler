@@ -1,17 +1,17 @@
 #ifndef SUBJECTS_H
 #define SUBJECTS_H
 
-#define SUBJ_LENGTH 256
+#define SUBJ_LENGTH 30
 #define EXTENSION ".sch"
 #define EXT_SIZE 5
 #define MAX_SUBJECTS 20
 
 struct subject {
-    char s_name [SUBJ_LENGTH];
+    char *s_name[MAX_SUBJECTS];
 };
 
-int SubjectsExist(void);
-void SubjectsShow(void);
+struct subject* SubjectsExist(void);
+void SubjectsShow(struct subject *p);
 void SubjectsNone(void);
 char *GetFileExtension(char *fname, size_t len);
 
