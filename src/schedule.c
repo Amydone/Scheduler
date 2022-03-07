@@ -92,8 +92,6 @@ char *GetFileExtension(char *fname, size_t len) {
 char f_ext[EXT_SIZE];
 char *extension;
 
-struct dirent *dirinfo;
-
 int j = EXT_SIZE-1;
 
     for(len; j >= 0; len--, j--)
