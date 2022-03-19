@@ -42,7 +42,7 @@ struct subject *p_subjects;
                 if(!strcmp(f_ext, EXTENSION))
                 {
 
-                    p_subjects->s_name[i] = malloc(SUBJ_LENGTH * f_count * sizeof(char*)); 
+                    p_subjects->s_name[i] = malloc(SUBJ_LENGTH * sizeof(char*));
 
                     strcpy(p_subjects->s_name[i], dirinfo->d_name);
 
@@ -58,27 +58,25 @@ struct subject *p_subjects;
 
     } 
     
+    p_subjects->s_name[i] = malloc(SUBJ_LENGTH * sizeof(char*));
+
+    p_subjects->s_name[i] = NULL;
 
     return p_subjects;
 
 
 }
 
-/* TODO 
- * Unexpected behaviour after calling this function,
- * program just close, may error in streams
- */
-
 void SubjectsShow(struct subject *p) {
 
     printf("Your subjects:\n");
 
-    for(int i = 0; p != NULL; i++)
+    for(int i = 0; (struct subject*)p->s_name[i] != NULL; i++)
     {
         printf("%d %s\n", i, p->s_name[i]);
 
     }
-    
+   
 }
 
 void SubjectsNone(void) {
