@@ -21,6 +21,7 @@ struct subject {
 struct subject* SubjectsExist(void);
 void SubjectsShow(struct subject *p);
 void SubjectsNone(void);
+void SubjectsOverflow(void);
 struct subject* SubjectsFree(struct subject *p);
 char *GetFileExtension(char *fname, size_t len);
 
