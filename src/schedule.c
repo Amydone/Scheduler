@@ -32,7 +32,6 @@ struct subject *p_subjects;
 
     while(dirinfo = readdir(dir))
     {
-
         strcpy(fname, dirinfo->d_name);
 
         if(f_len = strlen(fname))
@@ -41,8 +40,7 @@ struct subject *p_subjects;
             {
                 if(!strcmp(f_ext, EXTENSION))
                 {
-
-                    p_subjects->s_name[i] = malloc(SUBJ_LENGTH * sizeof(char*));
+                    p_subjects->s_name[i] = malloc(SUBJ_NAME_LEN * sizeof(char));
 
                     strcpy(p_subjects->s_name[i], dirinfo->d_name);
 
@@ -56,14 +54,26 @@ struct subject *p_subjects;
 
         }
 
-    } 
+    }
+
+    if(i)
+    {
+        p_subjects->s_name[i] = malloc(SUBJ_NAME_LEN * sizeof(char));
+
+        p_subjects->s_name[i] = NULL;
+
+        return p_subjects;
     
-    p_subjects->s_name[i] = malloc(SUBJ_LENGTH * sizeof(char*));
+    }
+    else
+    {
+ 
+        free(p_subjects);
 
-    p_subjects->s_name[i] = NULL;
+        p_subjects = NULL;
 
-    return p_subjects;
-
+        return p_subjects;
+    }
 
 }
 
@@ -76,13 +86,30 @@ void SubjectsShow(struct subject *p) {
         printf("%d %s\n", i, p->s_name[i]);
 
     }
-   
+
 }
 
 void SubjectsNone(void) {
 
     printf("Subjects are empty\n");
 
+}
+
+struct subject* SubjectsFree(struct subject *p) {
+
+    for(int i = 0; (struct subject*)p->s_name[i] != NULL; i++)
+    {
+        free(p->s_name[i]);
+
+        p->s_name[i] = NULL;
+
+    }
+
+    free(p);
+
+    p = NULL;
+
+    return p;
 }
 
 char *GetFileExtension(char *fname, size_t len) {
