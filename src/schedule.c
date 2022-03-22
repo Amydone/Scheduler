@@ -11,11 +11,10 @@ DIR *dir;
 struct dirent *dirinfo;
 char fname[256];
 size_t f_len;
-int f_count = 1;
-
 char path[] = "./";
-char *f_ext;
+char *f_ext = NULL;
 int i = 0;
+int file_count = 0;
 
 struct subject *p_subjects;
 
@@ -27,14 +26,14 @@ struct subject *p_subjects;
 
     }
     else
-
+    
     p_subjects = malloc(sizeof(struct subject));
-
+   
     while(dirinfo = readdir(dir))
     {
         strcpy(fname, dirinfo->d_name);
 
-        if(f_len = strlen(fname))
+        if((f_len = strlen(fname)) < SUBJ_NAME_LEN)
         {
             if((f_ext = GetFileExtension(fname, f_len)) != NULL)
             {
@@ -44,9 +43,15 @@ struct subject *p_subjects;
 
                     strcpy(p_subjects->s_name[i], dirinfo->d_name);
 
-                    f_count++;
+                    file_count++;
 
                     i++;
+
+                    if(file_count != MAX_SUBJECTS)
+                        continue;
+                    else
+                        SubjectsOverflow();
+                        break;
 
                }
         
@@ -83,7 +88,7 @@ void SubjectsShow(struct subject *p) {
 
     for(int i = 0; (struct subject*)p->s_name[i] != NULL; i++)
     {
-        printf("%d %s\n", i, p->s_name[i]);
+        printf("[%d]--- %s\n", i+1, p->s_name[i]);
 
     }
 
@@ -92,6 +97,12 @@ void SubjectsShow(struct subject *p) {
 void SubjectsNone(void) {
 
     printf("Subjects are empty\n");
+
+}
+
+void SubjectsOverflow(void) {
+
+    printf("Reached maximum amount of subjects %d\n", MAX_SUBJECTS);
 
 }
 
