@@ -13,7 +13,6 @@ char fname[256];
 size_t f_len;
 char path[] = "./";
 char *f_ext = NULL;
-int i = 0;
 int file_count = 0;
 
 struct subject *p_subjects;
@@ -39,13 +38,11 @@ struct subject *p_subjects;
             {
                 if(!strcmp(f_ext, EXTENSION))
                 {
-                    p_subjects->s_name[i] = malloc(SUBJ_NAME_LEN * sizeof(char));
+                    p_subjects->s_name[file_count] = malloc(SUBJ_NAME_LEN * sizeof(char));
 
-                    strcpy(p_subjects->s_name[i], dirinfo->d_name);
+                    strcpy(p_subjects->s_name[file_count], dirinfo->d_name);
 
                     file_count++;
-
-                    i++;
 
                     if(file_count != MAX_SUBJECTS)
                         continue;
@@ -61,11 +58,11 @@ struct subject *p_subjects;
 
     }
 
-    if(i)
+    if(file_count)
     {
-        p_subjects->s_name[i] = malloc(SUBJ_NAME_LEN * sizeof(char));
+        p_subjects->s_name[file_count] = malloc(SUBJ_NAME_LEN * sizeof(char));
 
-        p_subjects->s_name[i] = NULL;
+        p_subjects->s_name[file_count] = NULL;
 
         return p_subjects;
     
@@ -127,7 +124,6 @@ char *GetFileExtension(char *fname, size_t len) {
 
 char f_ext[EXT_SIZE];
 char *extension;
-
 int j = EXT_SIZE-1;
 
     for(len; j >= 0; len--, j--)
@@ -142,5 +138,12 @@ int j = EXT_SIZE-1;
     extension = f_ext;
 
     return extension;
+
+}
+
+struct subject* SubjectsCreate(struct subject *p) {
+
+
+    return p;
 
 }
