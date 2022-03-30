@@ -10,19 +10,30 @@
  *
  *  struct subject {
  *      char s_name[30];
+ *      struct time;
  *      struct subject *next;
  *  }
  */
 
 struct subject {
     char *s_name[SUBJ_NAME_LEN];
+    struct s_time *p_time;
 };
 
+struct s_time {
+    char data[11];
+    char hours[8];
+};
+
+
 struct subject* SubjectsExist(void);
+struct subject* SubjectsCreate(struct subject *p);
+struct subject* SubjectsFree(struct subject *p);
+
 void SubjectsShow(struct subject *p);
 void SubjectsNone(void);
 void SubjectsOverflow(void);
-struct subject* SubjectsFree(struct subject *p);
+
 char *GetFileExtension(char *fname, size_t len);
 
 #endif
