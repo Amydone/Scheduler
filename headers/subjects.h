@@ -1,10 +1,13 @@
 #ifndef SUBJECTS_H
 #define SUBJECTS_H
 
-#define SUBJ_NAME_LEN 30
+#define SUBJNAME_CHAR_SIZE 30
 #define EXTENSION ".sch"
-#define EXT_SIZE 5
+#define EXTENSION_INT_SIZE 5
 #define MAX_SUBJECTS 20
+
+#define DATE_CHAR_SIZE 11
+#define HOURS_CHAR_SIZE 8
 
 /*  may will be better to use linked list or smt like that
  *
@@ -16,13 +19,14 @@
  */
 
 struct subject {
-    char *s_name[SUBJ_NAME_LEN];
+    char *s_name[SUBJNAME_CHAR_SIZE];
     struct s_time *p_time;
+    struct subject *next;
 };
 
 struct s_time {
-    char data[11];
-    char hours[8];
+    char date[DATE_CHAR_SIZE];
+    char hours[HOURS_CHAR_SIZE];
 };
 
 
