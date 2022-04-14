@@ -19,7 +19,7 @@ struct subject *p_subjects;
 
     if(!(dir = opendir(path)))
     {
-        printf("Error of open dir directory\n");
+        fprintf(stderr, "Error while open directory\n");
 
         return 0;
 
@@ -32,13 +32,13 @@ struct subject *p_subjects;
     {
         strcpy(fname, dirinfo->d_name);
 
-        if((f_len = strlen(fname)) < SUBJ_NAME_LEN)
+        if((f_len = strlen(fname)) < SUBJNAME_CHAR_SIZE)
         {
-            if((f_ext = GetFileExtension(fname, f_len)) != NULL)
+            if((f_ext = GetFileExtension(fname, f_len)))
             {
                 if(!strcmp(f_ext, EXTENSION))
                 {
-                    p_subjects->s_name[file_count] = malloc(SUBJ_NAME_LEN * sizeof(char));
+                    p_subjects->s_name[file_count] = malloc(SUBJNAME_CHAR_SIZE * sizeof(char));
 
                     strcpy(p_subjects->s_name[file_count], dirinfo->d_name);
 
@@ -60,7 +60,7 @@ struct subject *p_subjects;
 
     if(file_count)
     {
-        p_subjects->s_name[file_count] = malloc(SUBJ_NAME_LEN * sizeof(char));
+        p_subjects->s_name[file_count] = malloc(SUBJNAME_CHAR_SIZE * sizeof(char));
 
         p_subjects->s_name[file_count] = NULL;
 
@@ -122,20 +122,17 @@ struct subject* SubjectsFree(struct subject *p) {
 
 char *GetFileExtension(char *fname, size_t len) {
 
-char f_ext[EXT_SIZE];
-char *extension;
-int j = EXT_SIZE-1;
+char *extension = malloc(EXTENSION_INT_SIZE+1 * sizeof(char));
 
-    for(len; j >= 0; len--, j--)
+int j = EXTENSION_INT_SIZE;
+
+    for(int i = len; i > 0; i--)
     {
-            
-        f_ext[j] = fname[len];
-
+        extension[j] = fname[i];
+        j--;
     }
 
-    f_ext[EXT_SIZE] = '\0';
-
-    extension = f_ext;
+    *(extension + EXTENSION_INT_SIZE+1) = '\0';
 
     return extension;
 
