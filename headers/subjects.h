@@ -3,7 +3,7 @@
 
 #define SUBJNAME_CHAR_SIZE 30
 #define EXTENSION ".sch"
-#define EXTENSION_INT_SIZE 5
+#define EXTENSION_INT_SIZE 4
 #define MAX_SUBJECTS 20
 
 #define DATE_CHAR_SIZE 11
