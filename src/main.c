@@ -4,18 +4,7 @@
 
 int main(void) {
 
-struct subject *subjects;
-
-    if(subjects = SubjectsExist())
-    {
-        SubjectsShow(subjects);
-        Entrance();
-
-    }
-    else
-        SubjectsNone();
-        Entrance();
-
+    Entrance();
 
     return 0;
 
