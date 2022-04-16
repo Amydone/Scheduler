@@ -1,8 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-/* Will design unique format of file
- */
+/* Future design of unique format of file
+*/
 
 int ParseFileFormat(char *fname);
 int SetFileFormat(char *fname);
