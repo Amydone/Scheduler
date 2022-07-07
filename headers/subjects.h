@@ -19,20 +19,28 @@
  */
 
 struct subject {
-    char *s_name[SUBJNAME_CHAR_SIZE];
-    struct s_time *p_time;
+    //char *s_name[SUBJNAME_CHAR_SIZE];
+    //struct s_time *p_time;
+    char s_name[SUBJNAME_CHAR_SIZE];
+    struct s_time {
+        char date[DATE_CHAR_SIZE];
+        short hrs;
+        short min;
+        short sec;
+        //[HOURS_CHAR_SIZE];
+    };
+
     struct subject *next;
 };
 
-struct s_time {
-    char date[DATE_CHAR_SIZE];
-    char hours[HOURS_CHAR_SIZE];
-};
 
+struct subject *SubjectExist(void);
+struct subject *SubjectCreate(struct subject *p);
+struct subject *SubjectOpen(void);
+struct subject *SubjectEdit(void);
+struct subject *SubjectDelete(void);
+struct subject *SubjectFree(struct subject *p);
 
-struct subject* SubjectsExist(void);
-struct subject* SubjectsCreate(struct subject *p);
-struct subject* SubjectsFree(struct subject *p);
 
 void SubjectsShow(struct subject *p);
 void SubjectsNone(void);
